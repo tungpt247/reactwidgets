@@ -1,0 +1,12 @@
+cache:
+  paths:
+    - node_modules/
+
+build:
+  script:
+    - npm install --quiet
+    - npm run test
+    - npm run build
+
+  except:
+    - /^release-*$/
