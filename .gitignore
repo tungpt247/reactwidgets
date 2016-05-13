@@ -31,3 +31,10 @@ node_modules
 
 # Optional REPL history
 .node_repl_history
+
+/test/coverage
+node_modules
+/dist
+/build
+/lib
+/coverage
