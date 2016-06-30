@@ -3,17 +3,23 @@ const webpack = require('webpack')
 const loaders = require('./webpack.loaders')
 const libraryName = 'Reactwidgets'
 const outputFile = libraryName.toLowerCase() + '.js'
+const HtmlwebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const bourbonPath = require('bourbon').includePaths
+const neatPath = require('bourbon-neat').includePaths
 
 module.exports = {
-  entry: [
-    './src/index.js' // Your appʼs entry point
-  ],
-  devtool: 'source-map',
+  entry: [__dirname + '/src/index.js'],
+  node: {
+    fs: 'empty'
+  },
+  debug: false,
+  devtool: 'cheap-module-source-map',
+  noInfo: true,
   output: {
-    path: path.join(__dirname, 'dist'),
+    path:__dirname + '/dist',
     filename: outputFile,
-    library: [libraryName],
+    library: libraryName,
     libraryTarget: 'umd',
     umdNamedDefine: true
   },
@@ -32,18 +38,46 @@ module.exports = {
       amd: 'react-dom'
     }
   }],
+  module: {
+    loaders: [
+      {
+          test: /\.(json)$/,
+          loaders: [
+            'json-loader?cacheDirectory'
+          ]
+        },
+        {
+          test: /\.(js|jsx)$/,
+          exclude: /node_modules/,
+          loaders: [
+            'babel-loader?cacheDirectory'
+          ]
+        },
+        {
+          test: /\.scss$/,
+          loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader')
+        }
+    ]
+  },
   resolve: {
+    extensions: ['', '.js', '.jsx'],
+    root: [
+      path.resolve('./src')
+    ],
     alias: {
       reactwidgets: 'src/index'
-    },
-    extensions: ['', '.js', '.jsx'],
-    root: [path.resolve('./src')]
+    }
   },
-  module: {
-    loaders: loaders
+  sassLoader: {
+    includePaths: bourbonPath.concat(neatPath)
   },
-  plugin: [
-    new ExtractTextPlugin('styles.css'),
+  plugins: [
+    new HtmlwebpackPlugin({
+      template: 'node_modules/html-webpack-template/index.ejs',
+      title: 'React Widgets',
+      appMountId: 'root',
+      inject: false
+    }),
     new webpack.NoErrorsPlugin(),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
@@ -60,6 +94,7 @@ module.exports = {
       output: {
         comments: false
       }
-    })
+    }),
+    new ExtractTextPlugin('[name].[chunkhash].css')
   ]
 }

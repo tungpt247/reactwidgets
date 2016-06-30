@@ -1,7 +1,9 @@
-var path = require('path')
-var webpack = require('webpack')
+const path = require('path')
+const webpack = require('webpack')
+const bourbonPath = require('bourbon').includePaths
+const neatPath = require('bourbon-neat').includePaths
 
-var webpackConfig = {
+const webpackConfig = {
   context: path.join(__dirname, './src'),
   devtool: 'eval',
   entry: {
@@ -29,6 +31,10 @@ var webpackConfig = {
         'babel-loader?cacheDirectory'
       ]
     }, ]
+  },
+  // sass-loader bourbon, neat path
+  sassLoader: {
+    includePaths: bourbonPath.concat(neatPath)
   },
   resolve: {
     alias: {
