@@ -1,3 +1,14 @@
 {
-  "presets": ["es2015", "react", "stage-1"]
+  "presets": ["es2015", "stage-0", "react"],
+  "plugins": ["transform-class-properties", "transform-es2015-arrow-functions"],
+   "env": {
+    "start": {
+      "presets": [
+        "react-hmre"
+      ]
+    },
+    "build": {
+      "plugins": ["transform-remove-console"]
+    }
+  }
 }
