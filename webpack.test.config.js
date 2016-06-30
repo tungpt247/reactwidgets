@@ -7,7 +7,7 @@ const webpackConfig = {
   context: path.join(__dirname, './src'),
   devtool: 'eval',
   entry: {
-    selectreact: ['./index.js']
+    reactwidgets: ['./index.js']
   },
   node: {
     fs: 'empty'
@@ -38,7 +38,7 @@ const webpackConfig = {
   },
   resolve: {
     alias: {
-      selectreact: path.resolve('./src/index.js')
+      reactwidgets: path.resolve('./src/index.js')
     },
     extensions: ['', '.js', '.jsx', '.json']
   },
@@ -46,7 +46,7 @@ const webpackConfig = {
 
 webpackConfig.module.preLoaders = webpackConfig.module.preLoaders || []
 webpackConfig.module.preLoaders.push({
-  test: /\.jsx?$/,
+  test: /\.(js|jsx)?$/,
   exclude: /(test|node_modules)\//,
   loader: 'isparta'
 })

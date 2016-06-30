@@ -5,9 +5,9 @@ module.exports = [
   {
     test: /\.(js|jsx)$/,
     exclude: /node_modules/,
-    loader: 'babel-loader',
+    loader: 'babel',
     query: {
-      presets: ['es2015', 'react', 'react-hmre'] // TODO:: Remove react-hmre on Production mode
+      presets: ['es2015', 'react', 'stage-0', 'react-hmre'] // TODO:: Remove react-hmre on Production mode
     }
   }, {
     test: /\.scss$/,
