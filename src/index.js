@@ -1,1 +1,3 @@
-export Alert from './components/Alert'
+import Alert from './components/alert/Alert'
+
+export {Alert}

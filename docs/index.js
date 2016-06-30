@@ -1,9 +1,11 @@
-import '../styles/index.scss'
+// import '../styles/index.scss'
 
 import React from 'react'
 import {render} from 'react-dom'
-import App from './lib/App'
+import {Router, browserHistory} from 'react-router'
+import routes from './routes'
 
-const containerEl = document.getElementById('rootContainer')
-
-render(<App/>, containerEl)
+render (
+   <Router routes={routes} history={browserHistory}  />,
+   document.getElementById('root')
+ )
