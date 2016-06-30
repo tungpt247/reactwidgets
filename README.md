@@ -1,9 +1,9 @@
-#Widget components
-A collection about React components
+#React components
+A collection of React components
 
 Currently under development.
 
-## Main Features
+##Main Features
 
 ##Development
 Install dependencies:
